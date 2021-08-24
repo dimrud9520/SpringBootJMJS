@@ -1,4 +1,4 @@
-package web.security;
+package com.example.springbootjm.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

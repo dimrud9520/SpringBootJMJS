@@ -1,7 +1,8 @@
-package web.dao;
+package com.example.springbootjm.dao;
 
 
-import web.models.User;
+import com.example.springbootjm.models.User;
+
 
 import java.util.List;
 

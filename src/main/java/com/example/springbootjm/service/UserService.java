@@ -1,8 +1,7 @@
-package web.service;
+package com.example.springbootjm.service;
 
 
-
-import web.models.User;
+import com.example.springbootjm.models.User;
 
 import java.util.List;
 

@@ -1,13 +1,14 @@
-package web.controllers;
+package com.example.springbootjm.controllers;
 
 
+import com.example.springbootjm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import web.models.Role;
-import web.models.User;
-import web.service.UserService;
+import com.example.springbootjm.models.Role;
+import com.example.springbootjm.models.User;
+
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,10 +1,11 @@
-package web.dao;
+package com.example.springbootjm.dao;
 
 
+import com.example.springbootjm.models.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
-import web.models.User;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
