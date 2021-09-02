@@ -20,4 +20,6 @@ public interface UserService {
 
     //вывод списка юзеров
     List<User> getAllUsers();
+
+    User getUserByName(String username);
 }

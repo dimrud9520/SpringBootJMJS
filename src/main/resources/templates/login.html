@@ -1,44 +1,35 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
+
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
   <title>login</title>
 
-  <style type="text/css">
-
-    input {
-      padding:10px;
-      border:0;
-      width:50%;
-      margin:10px 0;
-      box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
-    }
-
-    #centerLayer {
-      width: 400px; /* Ширина слоя в пикселах */
-      margin: 0 auto; /* Отступ слева и справа */
-      padding: 10px; /* Поля вокруг текста */
-      text-align: left; /* Выравнивание содержимого слоя по левому краю */
-    }
-
-  </style>
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
 </head>
+
 <body>
-<div id="centerLayer">
-  <form method="post" action="/login">
-    <tr>
-      <td>username: </td>
-      <td><input name="j_username"/></td>
-    </tr>
-    <br>
-    <tr>
-      <td>password: </td>
-      <td><input name="j_password"/></td>
-    </tr>
-    <input type="submit"/>
+<div class="container">
+
+  <form class="login" method="post" action="/login" style="max-width: 330px; margin: auto; padding-top: 40px;">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <div class="text-center mt-1">
+      <div class="form-floating">
+        <input name="j_username" type="username" class="form-control" id="username" placeholder="Username">
+        <input name="j_password" type="password" class="form-control" id="Password" placeholder="Password">
+      </div>
+
+      <div class="mt-2">
+        <button class="w-100 btn btn-sm btn-primary" type="submit">Sign in</button>
+      </div>
+
+    </div>
   </form>
+
 </div>
 </body>
 </html>

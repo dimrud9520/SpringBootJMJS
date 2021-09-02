@@ -14,27 +14,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-
 @Controller
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
-    private final UserDao userDao;
 
     @Autowired
-    public UserController(UserService userService, UserDao userDao) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.userDao = userDao;
     }
 
     @GetMapping()
     public String listForAdmin(Model model, Authentication authentication) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userDao.getUserByName(userDetails.getUsername());
+        User user = userService.getUserByName(userDetails.getUsername());
         model.addAttribute("user", user);
         model.addAttribute("authentication", authentication);
         return "users";
     }
-
-
 }
+
