@@ -15,21 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/users")
 public class UserController {
-    private final UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    @GetMapping()
-    public String listForAdmin(Model model, Authentication authentication) {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userService.getUserByName(userDetails.getUsername());
-        model.addAttribute("user", user);
-        model.addAttribute("authentication", authentication);
+    @GetMapping("/users")
+    public String getUser(){
         return "users";
     }
 }

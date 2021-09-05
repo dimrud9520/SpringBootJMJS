@@ -6,50 +6,52 @@ import javax.persistence.*;
 import java.util.Set;
 
 
+
 @Entity
-@Table(name = "roles")
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "role")
-    private String role;
+    private String roleName;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
+    @Transient
+    @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
     public Role() {
     }
 
-    public Role(int id) {
-        this.id = id;
+    public Role(String roleName) {
+        if (roleName.contains("ADMIN")) {
+            this.id = 1L;
+        } else if (roleName.contains("USER")) {
+            this.id = 2L;
+        }
+        this.roleName = roleName;
     }
 
-    public Role(int id, String role) {
-        this.id = id;
-        this.role = role;
-    }
 
     @Override
     public String getAuthority() {
-        return role;
+        return roleName;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     public String getRole() {
-        return role;
+        return roleName;
     }
 
     public void setRole(String role) {
-        this.role = role;
+        this.roleName = role;
     }
 
     public Set<User> getUsers() {
@@ -62,6 +64,8 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String toString() {
-        return role;
+        return roleName;
     }
+
+
 }

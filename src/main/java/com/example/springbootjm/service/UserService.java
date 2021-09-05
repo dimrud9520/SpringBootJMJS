@@ -6,6 +6,7 @@ import com.example.springbootjm.models.User;
 import java.util.List;
 
 public interface UserService {
+
     //добавление юзера
     void addUser(User user);
 
@@ -21,5 +22,5 @@ public interface UserService {
     //вывод списка юзеров
     List<User> getAllUsers();
 
-    User getUserByName(String username);
+    User findByUsername(String username);
 }

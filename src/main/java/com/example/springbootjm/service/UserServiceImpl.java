@@ -1,59 +1,66 @@
 package com.example.springbootjm.service;
 
-import com.example.springbootjm.dao.UserDao;
+
 import com.example.springbootjm.models.User;
+import com.example.springbootjm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private UserDao userDao;
+    private UserRepository userRepository;
+
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Autowired
-    public UserServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
-    @Transactional
     public void addUser(User user) {
-        userDao.addUser(user);
+        user.setPassword(passwordEncoder().encode(user.getPassword()));
+        userRepository.save(user);
     }
 
     @Override
-    @Transactional
     public void updateUser(User user) {
-        userDao.updateUser(user);
+        user.setPassword(passwordEncoder().encode(user.getPassword()));
+        userRepository.save(user);
     }
 
     @Override
-    @Transactional
     public User get(long id) {
-        return userDao.get(id);
+        return userRepository.getUserById(id);
     }
 
     @Override
-    @Transactional
     public void removeUserById(long id) {
-        userDao.removeUserById(id);
+        userRepository.deleteById(id);
     }
 
     @Override
-    @Transactional
     public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+        var it = userRepository.findAll();
+        var users = new ArrayList<User>();
+        it.forEach(e -> users.add(e));
+        return users;
     }
 
     @Override
-    @Transactional
-    public User getUserByName(String username){
-        return userDao.getUserByName(username);
+    public User findByUsername(String username){
+        return userRepository.findByUsername(username);
     }
 
 }

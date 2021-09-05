@@ -1,8 +1,8 @@
 package com.example.springbootjm.service;
 
-import com.example.springbootjm.dao.UserDao;
 import com.example.springbootjm.models.Role;
 import com.example.springbootjm.models.User;
+import com.example.springbootjm.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,16 +18,16 @@ import java.util.Set;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private final UserDao userDao;
+    private final UserRepository userRepository ;
 
-    public UserDetailsServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDao.getUserByName(username);
+        User user = userRepository.findByUsername(username);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role role : user.getRoles()) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
